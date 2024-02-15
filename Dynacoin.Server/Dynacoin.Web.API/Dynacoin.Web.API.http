@@ -1,0 +1,6 @@
+@Dynacoin.Server_HostAddress = http://localhost:5199
+
+GET {{Dynacoin.Server_HostAddress}}/coininfo/
+Accept: application/json
+
+###
