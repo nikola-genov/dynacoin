@@ -1,4 +1,4 @@
-namespace Dynacoin.Server
+namespace Dynacoin.Domain.Model
 {
     public class CoinInfo
     {

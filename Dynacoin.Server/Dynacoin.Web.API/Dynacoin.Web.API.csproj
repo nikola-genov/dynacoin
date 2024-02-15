@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <SpaRoot>..\dynacoin.client</SpaRoot>
+    <SpaRoot>..\..\dynacoin.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
   </PropertyGroup>
@@ -18,9 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dynacoin.client\dynacoin.client.esproj">
+    <ProjectReference Include="..\..\dynacoin.client\dynacoin.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Dynacoin.Domain\Dynacoin.Domain.csproj" />
+    <ProjectReference Include="..\Dynacoin.Services\Dynacoin.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,5 @@
+using Dynacoin.Domain.Model;
+using Dynacoin.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dynacoin.Server.Controllers
@@ -6,22 +8,20 @@ namespace Dynacoin.Server.Controllers
     [Route("[controller]")]
     public class CoinInfoController : ControllerBase
     {
+        private readonly ICoinInfoService _coinInfoService;
+
         private readonly ILogger<CoinInfoController> _logger;
 
-        public CoinInfoController(ILogger<CoinInfoController> logger)
+        public CoinInfoController(ICoinInfoService coinInfoService, ILogger<CoinInfoController> logger)
         {
+            _coinInfoService = coinInfoService;
             _logger = logger;
         }
 
         [HttpGet(Name = "GetCoinInfo")]
         public IEnumerable<CoinInfo> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new CoinInfo
-            {
-                Symbol = $"BTC{index}",
-                Price = 50000
-            })
-            .ToArray();
+            return _coinInfoService.GetCoinInfos();
         }
     }
 }

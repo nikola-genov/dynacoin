@@ -1,6 +1,12 @@
+using Dynacoin.Domain.Services;
+using Dynacoin.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// TODO - extract dependency configurations to a separate class
+builder.Services.AddTransient<ICoinInfoService, CoinloreInfoService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
