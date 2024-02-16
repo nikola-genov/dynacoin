@@ -1,4 +1,6 @@
-﻿using Dynacoin.Domain.Model;
+﻿using Dynacoin.Coinlore.Sdk;
+using Dynacoin.Coinlore.Sdk.Model;
+using Dynacoin.Domain.Model;
 using Dynacoin.Domain.Services;
 
 namespace Dynacoin.Services
@@ -8,14 +10,25 @@ namespace Dynacoin.Services
     /// </summary>
     public class CoinloreInfoService : ICoinInfoService
     {
-        public IEnumerable<CoinInfo> GetCoinInfos()
+        public async Task<IEnumerable<CoinInfo>> GetCoinInfosAsync(IEnumerable<string> tickerSymbols)
         {
-            return Enumerable.Range(1, 5).Select(index => new CoinInfo
+            if (tickerSymbols == null || !tickerSymbols.Any())
+                return Enumerable.Empty<CoinInfo>();
+
+            // TODO - handle the case when a given ticker symbol is missing in the map...
+            var coinloreCoinIds = tickerSymbols.Select(t => TickerMap.TickerIds[t]);
+
+            // TODO - use DI...
+            IEnumerable<Ticker> tickers = await new CoinloreClient()
+                .GetMultipleTickerAsync(coinloreCoinIds)
+                .ConfigureAwait(false);
+            
+            return tickers.Select(t => new CoinInfo
             {
-                Symbol = $"BTC{index}",
-                Price = 50000
+                Symbol = t.Symbol,
+                Price = t.PriceUsd
             })
-            .ToArray();
+            .ToList();
         }
     }
 }

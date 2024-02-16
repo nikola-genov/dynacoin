@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
+import CoinsFileUpload from './components/CoinsFileUpload';
 
 interface CoinInfo {
     symbol: string;
@@ -9,13 +10,14 @@ interface CoinInfo {
 function App() {
     const [coinInfos, setCoinInfos] = useState<CoinInfo[]>();
 
-    useEffect(() => {
-        populateCoinData();
-    }, []);
+    const handleUploadComplete = (data: CoinInfo[]) => {
+        setCoinInfos(data);
+    };
 
     const contents = coinInfos === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
+        ? <p><em>No coins file uploaded</em></p>
         : <table className="table table-striped" aria-labelledby="tabelLabel">
+            <caption>Coin Info</caption>
             <thead>
                 <tr>
                     <th>Symbol</th>
@@ -34,16 +36,10 @@ function App() {
 
     return (
         <div>
-            <h1 id="tabelLabel">Coin Info</h1>
+            <CoinsFileUpload onUploadComplete={handleUploadComplete} />
             {contents}
         </div>
     );
-
-    async function populateCoinData() {
-        const response = await fetch('coininfo');
-        const data = await response.json();
-        setCoinInfos(data);
-    }
 }
 
 export default App;

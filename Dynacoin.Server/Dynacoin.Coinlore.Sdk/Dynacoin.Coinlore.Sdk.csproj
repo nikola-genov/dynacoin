@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dynacoin.Coinlore.Sdk\Dynacoin.Coinlore.Sdk.csproj" />
-    <ProjectReference Include="..\Dynacoin.Domain\Dynacoin.Domain.csproj" />
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Converters\**" />
   </ItemGroup>
 
 </Project>

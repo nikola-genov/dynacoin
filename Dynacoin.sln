@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynacoin.Domain", "Dynacoin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynacoin.Services", "Dynacoin.Server\Dynacoin.Services\Dynacoin.Services.csproj", "{07AA0F7A-23A1-40AF-A420-573D8E6FE8E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynacoin.Coinlore.Sdk", "Dynacoin.Server\Dynacoin.Coinlore.Sdk\Dynacoin.Coinlore.Sdk.csproj", "{1E72470C-F348-450C-9B34-D0BB1975B769}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{07AA0F7A-23A1-40AF-A420-573D8E6FE8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07AA0F7A-23A1-40AF-A420-573D8E6FE8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07AA0F7A-23A1-40AF-A420-573D8E6FE8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E72470C-F348-450C-9B34-D0BB1975B769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E72470C-F348-450C-9B34-D0BB1975B769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E72470C-F348-450C-9B34-D0BB1975B769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E72470C-F348-450C-9B34-D0BB1975B769}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
