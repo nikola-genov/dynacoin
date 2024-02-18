@@ -5,6 +5,11 @@
     text-align: center;
 }
 
+table {
+    margin: 3rem 0;
+    width: 100%;
+}
+
 tr:nth-child(even) {
     background: #F2F2F2;
 }

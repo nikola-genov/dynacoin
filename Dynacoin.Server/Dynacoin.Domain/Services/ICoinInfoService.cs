@@ -4,6 +4,8 @@ namespace Dynacoin.Domain.Services
 {
     public interface ICoinInfoService
     {
-        Task<IEnumerable<CoinInfo>> GetCoinInfosAsync(IEnumerable<string> tickerSymbols);
+        Task<IEnumerable<Coin>> GetCoinsAsync(IEnumerable<string> tickerSymbols);
+        Task<PortfolioSummary> GetPortfolioSummaryAsync(IEnumerable<CoinBalance> coinBalances);
+        PortfolioSummary CalculatePortfolioSummary(IEnumerable<Coin> coins, IEnumerable<CoinBalance> coinBalances);
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace Dynacoin.Web.API.Model
+﻿namespace Dynacoin.Domain.Model
 {
-    public class CoinRequestModel
+    public class CoinBalance
     {
-        public decimal Amount { get; set; }
         public required string Symbol { get; set; }
+        public decimal Amount { get; set; }
         public decimal InitialPriceUsd { get; set; }
     }
 }

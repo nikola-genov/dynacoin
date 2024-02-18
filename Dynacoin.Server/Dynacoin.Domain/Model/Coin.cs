@@ -1,8 +1,8 @@
 namespace Dynacoin.Domain.Model
 {
-    public class CoinInfo
+    public class Coin
     {
         public required string Symbol { get; set; }
-        public decimal Price { get; set; }
+        public decimal PriceUsd { get; set; }
     }
 }

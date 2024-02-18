@@ -1,5 +1,6 @@
 using CsvHelper;
 using CsvHelper.Configuration;
+using Dynacoin.Domain.Model;
 using Dynacoin.Domain.Services;
 using Dynacoin.Web.API.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,16 @@ namespace Dynacoin.Server.Controllers
 
             try
             {
-                var requestedCoins = ParseCoinsRequestFile(file);
-                var requestedCoinTickers = requestedCoins.Select(c => c.Symbol).ToList();
+                var coinBalances = ParseCoinsRequestFile(file).Select(c => new CoinBalance
+                { 
+                    Symbol = c.Symbol.ToUpper(), // support case insensitive Ticker Symbol matching
+                    InitialPriceUsd = c.InitialPriceUsd,
+                    Amount = c.Amount
+                });
 
-                var coinInfos = await coinInfoService.GetCoinInfosAsync(requestedCoinTickers);
-                
-                return Ok(coinInfos);
+                var portfolio = await coinInfoService.GetPortfolioSummaryAsync(coinBalances);
+
+                return Ok(portfolio);
             }
             catch (Exception ex)
             {
@@ -36,10 +41,9 @@ namespace Dynacoin.Server.Controllers
             }
         }
 
-        private IEnumerable<CoinRequestModel> ParseCoinsRequestFile(IFormFile file)
+        private List<CoinRequestModel> ParseCoinsRequestFile(IFormFile file)
         {
             using var streamReader = new StreamReader(file.OpenReadStream());
-            
             using var csvReader = new CsvReader(streamReader, new CsvConfiguration(CultureInfo.InvariantCulture) 
             {
                 Delimiter = DefaultCsvDelimiter,
