@@ -34,13 +34,13 @@ function App() {
                     <tr>
                         <th>Total Value (USD)</th>
                         <th>Initial Value (USD)</th>
-                        <th>Change (%)</th>
+                        <th>Change</th>
                     </tr>
                 </thead>
                 <tr>
                     <td>{portfolioSummary.totalValueUsd}</td>
                     <td>{portfolioSummary.initialValueUsd}</td>
-                    <td>{portfolioSummary.changeUsdPercent}</td>
+                    <td>{portfolioSummary.changeUsdPercent.toFixed(2)}%</td>
                 </tr>
             </table>
             <table className="table table-striped" aria-labelledby="tabelLabel">
@@ -51,7 +51,7 @@ function App() {
                         <th>Amount</th>
                         <th>Price (USD)</th>
                         <th>Initial Price (USD)</th>
-                        <th>Change (%)</th>
+                        <th>Change</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@ function App() {
                         <td>{c.amount}</td>
                         <td>{c.priceUsd}</td>
                         <td>{c.initialPriceUsd}</td>
-                        <td>{c.changeUsdPercent}</td>
+                        <td>{c.changeUsdPercent.toFixed(2)}%</td>
                     </tr>
                     )}
                 </tbody>
