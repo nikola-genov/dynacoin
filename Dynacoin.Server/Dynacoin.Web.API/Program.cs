@@ -1,7 +1,16 @@
 using Dynacoin.Domain.Services;
 using Dynacoin.Services;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    // TODO - extract the file path to a config file
+    .WriteTo.File("c:/logs/dynacoin.log")
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 // TODO - extract dependency configurations to a separate class

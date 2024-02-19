@@ -21,6 +21,8 @@ namespace Dynacoin.Server.Controllers
             if (file == null)
                 return BadRequest();
 
+            logger.LogInformation($"POST request to {nameof(GetCoinInfoAsync)}, filename: {file.FileName}");
+
             try
             {
                 var coinBalances = ParseCoinsRequestFile(file).Select(c => new CoinBalance
