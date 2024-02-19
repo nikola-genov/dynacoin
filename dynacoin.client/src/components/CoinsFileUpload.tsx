@@ -12,7 +12,7 @@ const CoinsFileUpload = ({ onUploadComplete }) => {
         formData.append('file', selectedFile);
 
         // TODO - extract endpoint to external config
-        fetch('coininfo', {
+        fetch('coininfo/portfolio-summary-file', {
             method: 'POST',
             body: formData
         })

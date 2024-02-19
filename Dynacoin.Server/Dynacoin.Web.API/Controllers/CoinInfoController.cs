@@ -15,13 +15,13 @@ namespace Dynacoin.Server.Controllers
         private const string DefaultCsvDelimiter = "|";
 
 
-        [HttpPost(Name = "CoinInfo")]
-        public async Task<ActionResult> GetCoinInfoAsync(IFormFile file)
+        [HttpPost("portfolio-summary-file")]
+        public async Task<ActionResult> GetPortfolioSummaryAsync(IFormFile file)
         {
             if (file == null)
                 return BadRequest();
 
-            logger.LogInformation($"POST request to {nameof(GetCoinInfoAsync)}, filename: {file.FileName}");
+            logger.LogInformation($"POST file request to {nameof(GetPortfolioSummaryAsync)}, filename: {file.FileName}");
 
             try
             {
@@ -32,6 +32,27 @@ namespace Dynacoin.Server.Controllers
                     Amount = c.Amount
                 });
 
+                var portfolio = await coinInfoService.GetPortfolioSummaryAsync(coinBalances);
+
+                return Ok(portfolio);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error retrieving coin data.");
+                throw;
+            }
+        }
+
+        [HttpPost("portfolio-summary")]
+        public async Task<ActionResult> GetPortfolioSummaryAsync(IEnumerable<CoinBalance> coinBalances)
+        {
+            if (coinBalances == null)
+                return BadRequest();
+
+            logger.LogInformation($"POST request to {nameof(GetPortfolioSummaryAsync)}");
+
+            try
+            {
                 var portfolio = await coinInfoService.GetPortfolioSummaryAsync(coinBalances);
 
                 return Ok(portfolio);

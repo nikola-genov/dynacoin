@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import config from './config';
 import CoinsFileUpload from './components/CoinsFileUpload';
 
 // TODO - extract interfaces to external files
+interface CoinBalance {
+    symbol: string;
+    amount: number;
+    initialPriceUsd: number;
+}
+
 interface CoinSummary {
     symbol: string;
     amount: number;
@@ -20,9 +27,48 @@ interface PortfolioSummary {
 
 function App() {
     const [portfolioSummary, setPortfolioSummary] = useState<PortfolioSummary>();
+    
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            console.log("refreshing portfolio");
+            refreshPortfolio();
+        }, config.refreshIntervalSeconds * 1000);
 
+        // clean up the effect
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [portfolioSummary]);
+    
     const handleUploadComplete = (data: PortfolioSummary) => {
         setPortfolioSummary(data);
+    };
+
+    const refreshPortfolio = () => {
+        if (portfolioSummary?.coins == null || portfolioSummary.coins.length == 0)
+            return;
+
+        const coinBalances: CoinBalance[] = portfolioSummary.coins.map(c => ({
+            symbol: c.symbol,
+            amount: c.amount,
+            initialPriceUsd: c.initialPriceUsd
+        }));
+
+        // TODO - extract endpoint to external config
+        fetch('coininfo/portfolio-summary', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(coinBalances)
+        })
+        .then(response => response.json())
+        .then(data => {
+            setPortfolioSummary(data);
+        })
+        .catch(error => {
+            console.error('Error refreshing portfolio:', error);
+        });
     };
 
     const contents = portfolioSummary?.coins === undefined
@@ -37,11 +83,13 @@ function App() {
                         <th>Change</th>
                     </tr>
                 </thead>
-                <tr>
-                    <td>{portfolioSummary.totalValueUsd}</td>
-                    <td>{portfolioSummary.initialValueUsd}</td>
-                    <td>{portfolioSummary.changeUsdPercent.toFixed(2)}%</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>{portfolioSummary.totalValueUsd}</td>
+                        <td>{portfolioSummary.initialValueUsd}</td>
+                        <td>{portfolioSummary.changeUsdPercent.toFixed(2)}%</td>
+                    </tr>
+                </tbody>
             </table>
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <caption>Coins</caption>
