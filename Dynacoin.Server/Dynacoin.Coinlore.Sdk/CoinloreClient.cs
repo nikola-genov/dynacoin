@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Dynacoin.Coinlore.Sdk
 {
-    public class CoinloreClient
+    public class CoinloreClient : ICoinloreClient
     {
         private const string ApiRootUrl = "https://api.coinlore.com/api";
 

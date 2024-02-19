@@ -1,3 +1,4 @@
+using Dynacoin.Coinlore.Sdk;
 using Dynacoin.Domain.Services;
 using Dynacoin.Services;
 using Serilog;
@@ -15,6 +16,7 @@ builder.Host.UseSerilog();
 // Add services to the container.
 // TODO - extract dependency configurations to a separate class
 builder.Services.AddTransient<ICoinInfoService, CoinloreInfoService>();
+builder.Services.AddTransient<ICoinloreClient, CoinloreClient>();
 
 
 builder.Services.AddControllers();
