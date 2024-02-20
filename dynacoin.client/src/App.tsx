@@ -2,28 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import config from './config';
 import CoinsFileUpload from './components/CoinsFileUpload';
-
-// TODO - extract interfaces to external files
-interface CoinBalance {
-    symbol: string;
-    amount: number;
-    initialPriceUsd: number;
-}
-
-interface CoinSummary {
-    symbol: string;
-    amount: number;
-    priceUsd: number;
-    initialPriceUsd: number;
-    changeUsdPercent: number;
-}
-
-interface PortfolioSummary {
-    initialValueUsd: number;
-    totalValueUsd: number;
-    changeUsdPercent: number;
-    coins: CoinSummary[];
-}
+import { CoinBalance } from './models/CoinBalance';
+import { PortfolioSummary } from './models/PortfolioSummary';
 
 function App() {
     const [portfolioSummary, setPortfolioSummary] = useState<PortfolioSummary>();
