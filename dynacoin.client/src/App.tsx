@@ -85,8 +85,8 @@ function App() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{portfolioSummary.totalValueUsd}</td>
-                        <td>{portfolioSummary.initialValueUsd}</td>
+                        <td>{portfolioSummary.totalValueUsd.toFixed(4)}</td>
+                        <td>{portfolioSummary.initialValueUsd.toFixed(4)}</td>
                         <td>{portfolioSummary.changeUsdPercent.toFixed(2)}%</td>
                     </tr>
                 </tbody>
@@ -105,9 +105,9 @@ function App() {
                 <tbody>
                     {portfolioSummary.coins.map(c => <tr key={c.symbol}>
                         <td>{c.symbol}</td>
-                        <td>{c.amount}</td>
-                        <td>{c.priceUsd}</td>
-                        <td>{c.initialPriceUsd}</td>
+                        <td>{c.amount.toFixed(4)}</td>
+                        <td>{c.priceUsd.toFixed(4)}</td>
+                        <td>{c.initialPriceUsd.toFixed(4)}</td>
                         <td>{c.changeUsdPercent.toFixed(2)}%</td>
                     </tr>
                     )}
