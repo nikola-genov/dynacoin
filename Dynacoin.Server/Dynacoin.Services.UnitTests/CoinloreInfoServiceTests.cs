@@ -1,6 +1,7 @@
 using Dynacoin.Coinlore.Sdk;
 using Dynacoin.Coinlore.Sdk.Model;
 using Dynacoin.Domain.Model;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Dynacoin.Services.UnitTests
@@ -31,7 +32,7 @@ namespace Dynacoin.Services.UnitTests
                     new() { Symbol = "ETH", PriceUsd =  1400, Name="eth", NameId = "ethc" }
                 });
 
-            var coinloreInfoService = new CoinloreInfoService(coinloreClientMock.Object);
+            var coinloreInfoService = new CoinloreInfoService(coinloreClientMock.Object, new Mock<ILogger<CoinloreInfoService>>().Object);
 
             // Act
             var summary = await coinloreInfoService.GetPortfolioSummaryAsync(coinBalances);
@@ -41,7 +42,7 @@ namespace Dynacoin.Services.UnitTests
             Assert.That(summary.TotalValueUsd, Is.EqualTo(76480), "TotalValueUsd is incorrect");
             Assert.That(summary.ChangeUsdPercent, Is.EqualTo(98.3402489626556), "ChangeUsdPercent is incorrect");
             
-            Assert.That(summary.Coins.Count, Is.EqualTo(2), "Coins Count is incorrect");
+            Assert.That(summary.Coins, Has.Count.EqualTo(2), "Coins Count is incorrect");
 
             Assert.That(summary.Coins[0].InitialPriceUsd, Is.EqualTo(24000), "InitialPriceUsd is incorrect");
             Assert.That(summary.Coins[0].PriceUsd, Is.EqualTo(48000), "PriceUsd is incorrect");
