@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynacoin.Coinlore.Sdk", "Dy
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C8C1E5C7-6BED-4ED8-AF2C-BBA1D9E1A106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynacoin.Services.UnitTests", "Dynacoin.Server\Dynacoin.Services.UnitTests\Dynacoin.Services.UnitTests.csproj", "{3B7AEC57-F9F6-4F2C-BBE4-3B2A3F00062C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynacoin.Services.UnitTests", "Dynacoin.Server\Dynacoin.Services.UnitTests\Dynacoin.Services.UnitTests.csproj", "{3B7AEC57-F9F6-4F2C-BBE4-3B2A3F00062C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76F8DDEC-03C1-4EB3-B008-98B8A29AB627}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

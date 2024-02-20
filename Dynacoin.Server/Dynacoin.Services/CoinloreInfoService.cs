@@ -50,6 +50,8 @@ namespace Dynacoin.Services
             if (coins.Count() != coinBalances.Count())
                 throw new ArgumentException($"Error calculating Portfolio Summary. Both collections {nameof(coins)} and {nameof(coinBalances)} must be of equal length.");
 
+            // TODO - handle the case when the same Symbol is present more than once in the list. Throw an exception or sum up the balance???
+
             var coinData = from coin in coins
                            join balance in coinBalances on coin.Symbol equals balance.Symbol
                            select new
