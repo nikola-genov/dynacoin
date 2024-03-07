@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
 
+builder.Services.AddHttpClient();
+
 // Add services to the container.
 // TODO - extract dependency configurations to a separate class
 builder.Services.AddTransient<ICoinInfoService, CoinloreInfoService>();

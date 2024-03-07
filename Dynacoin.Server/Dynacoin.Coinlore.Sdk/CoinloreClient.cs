@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Dynacoin.Coinlore.Sdk
 {
-    public class CoinloreClient : ICoinloreClient
+    public class CoinloreClient(IHttpClientFactory httpClientFactory) : ICoinloreClient
     {
         private const string ApiRootUrl = "https://api.coinlore.com/api";
 
@@ -26,7 +26,7 @@ namespace Dynacoin.Coinlore.Sdk
 
         private async Task<T> ExecuteApiRequestAsync<T>(string url)
         {
-            using HttpClient client = new();
+            using HttpClient client = httpClientFactory.CreateClient();
             try
             {
                 HttpResponseMessage response = await client.GetAsync($"{ApiRootUrl}/{url}");
